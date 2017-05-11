@@ -24,6 +24,10 @@
   padding-left: 5px; 
 }
 
+#diary_title {
+  float: left;
+}
+
 .date {
   font-size: 6px;
 }
