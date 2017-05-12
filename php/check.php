@@ -1,4 +1,4 @@
-  <?php
+<?php
 session_start();
 require('dbconnect.php');
 // index.phpで入力された内容を受取り表示する
@@ -7,7 +7,7 @@ require('dbconnect.php');
 
 // index.phpを正しく通って来なかった場合、強制的にindex.phpに遷移
 if (!isset($_SESSION['join'])) { 
-    header('Location: login.php');
+    header('Location: index.php');
     exit();
 }
 // 会員登録ボタンが押された際
@@ -26,10 +26,7 @@ if (!empty($_POST)) {
                                           `password`=?,
                                           `picture_path`=?,
                                           `created`=NOW()';
-        $data = array($nick_name,
-                      $email,
-                      $password,
-                      $picture_path);
+        $data = array($nick_name, $email, $password, $picture_path);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
 
@@ -52,7 +49,12 @@ if (!empty($_POST)) {
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>NexSeed Diary 確認</title>
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../assets/css/form.css" rel="stylesheet">
+    <link href="../assets/css/timeline.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
 </head>
 <body>
   <div>
@@ -67,7 +69,7 @@ if (!empty($_POST)) {
     パスワード：<br>
     <?php echo $_SESSION['join']['password']; ?>
   </div>
-  <img src="../member_picture<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
+  <img src="../member_picture/<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
   <br>
   <form method="POST" action="">  
     <input type="hidden" name="hoge" value="fuga">

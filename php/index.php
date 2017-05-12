@@ -27,6 +27,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
 }
 // 確認画面へボタンが押されたとき
 if (!empty($_POST)) {
+
     $nick_name = $_POST['nick_name'];
     $email     = $_POST['email'];
     $password  = $_POST['password'];
@@ -60,7 +61,6 @@ if (!empty($_POST)) {
           // 画像が未選択の場合
         $errors['picture_path'] = 'blank';
       }
-
   }
     // メールアドレスの重複チェック
     if (empty($errors)) {
@@ -71,8 +71,6 @@ if (!empty($_POST)) {
             $stmt = $dbh->prepare($sql);
             $stmt->execute($data);
             $record = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // var_dump($record);
 
             if ($record['cnt'] > 0) {
               // 同じメールアドレスがDB内に存在したため
@@ -94,15 +92,12 @@ if (!empty($_POST)) {
       $_SESSION['join'] = $_POST; // joinは何でも良い
       $_SESSION['join']['picture_path'] = $picture_name;
       
-      header('Location: confirm.php');
+      var_dump($_FILES);
+
+      header('Location: check.php');
       exit();
-     } 
-
-
-}
-
-
-
+     }
+  }
 
 ?>
 
@@ -114,7 +109,7 @@ if (!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>NexSeed Diary</title>
+    <title>NexSeed Diary 新規会員登録</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -154,7 +149,7 @@ if (!empty($_POST)) {
     <div class="row">
       <div class="col-md-6 col-md-offset-3 content-margin-top">
         <legend>新規会員登録</legend>
-        <form method="post" action="" class="form-horizontal" role="form" enctype="multipart/form-data"><!-- enctypeがないと$_FILESが作成されない-->
+        <form method="POST" action="" class="form-horizontal" role="form" enctype="multipart/form-data"><!-- enctypeがないと$_FILESが作成されない-->
           <!-- ニックネーム -->
           <div class="form-group">
             <label class="col-sm-4 control-label">ニックネーム</label>

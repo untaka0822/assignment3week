@@ -21,19 +21,20 @@ if (isset($_COOKIE['email']) && $_COOKIE['email'] == '') {
 if (!empty($_POST)) {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
-	if ($email != '' && $password != '') {
 // 入力されたメールアドレスとパスワードの組み合わせがデータベースに登録されているかチェック
+	if ($email != '' && $password != '') {
+
 		$sql = 'SELECT * FROM `members` WHERE `email`=? AND `password`=?';
 		$data = array($email, sha1($password));
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute($data); // データが1件か、0件か
-
 		$record = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if ($record == false) {  // trueにして処理を逆にしても同じ
 			 	// そうでなければエラーメッセージ
 				// echo 'ログイン処理失敗';
         $errors['login'] = 'failed';
+
 		} else {
 			  // されていなければログイン処理
 				// echo 'ログイン処理成功';
@@ -64,9 +65,14 @@ if (!empty($_POST)) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-	<title></title>
+	<title>ログインページ</title>
+	<link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../assets/css/form.css" rel="stylesheet">
+    <link href="../assets/css/timeline.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
 </head>
 <body>
 	<h1>ログイン</h1>

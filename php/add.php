@@ -3,13 +3,24 @@
   session_start();
   require('dbconnect.php');
 
-  $id = '';
-  $title = '';
-  $contents = '';
+  if (isset($_SESSION['login_member_id']) && $_SESSION['time']+ 3600 > time()) {
+  $_SESSION['time'] = time();
+  $sql = 'SELECT * FROM `members` WHERE `member_id`=?';
+  $data = array($_SESSION['login_member_id']);
+  $stmt1 = $dbh->prepare($sql);
+  $stmt1->execute($data);
+  // $login_user = $stmt1->fetch(PDO::FETCH_ASSOC);
 
+  } else {
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
+  }
+
+  // ボタンを押した時
   if (!empty($_POST)) {
-    $sql = 'INSERT INTO `diary` SET `id`=?, `title`=?, `contents`=?';
-    $data = array($id, $title, $contents);
+    $sql = 'INSERT INTO `diary` SET `diary_id`=?, `title`=?, `contents`=?';
+    $data = array($diary_id, $title, $contents);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
   }
@@ -37,7 +48,7 @@
           <input id="diary_title" style="width: 200px; height: 10px;" type="text" name="title" placeholder="日記のタイトルを入力してください">
           <textarea style="width: 400px; height: 100px;" name="contents" placeholder="日記の内容を入力してください"></textarea>
           <input type="submit" value="完了">
-          <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
+          <input type="hidden" name="diary_id" value="<?php echo $_POST['diary_id']; ?>">
         </form>
       </div>   
     </div>
