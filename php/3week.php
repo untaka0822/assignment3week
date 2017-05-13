@@ -16,23 +16,6 @@
     exit();
   }
 
-  // if (!empty($_POST['tweet'])) {
-  //   if ($_POST['tweet'] != '') {
-  //     // DBへの登録処理
-  //     $sql = 'INSERT INTO `diary` SET `diary_id`=?,
-  //                                      `user_id`=?,
-  //                                      `title`=?,
-  //                                      `contents`=?,
-  //                                      `created`=NOW()';
-  //     $data = array($_POST['diary_id'], $_SESSION['login_member_id'], $_POST['title'], $_POST['contents']);
-  //     $stmt = $dbh->prepare($sql);
-  //     $stmt->execute($data);
-
-  //     header('Location: top.php');
-  //     exit();
-  //   }
-  // }
-
   $sql = 'SELECT * FROM `members` WHERE `member_id`=?';
   $data = array($_SESSION['login_member_id']);
   $stmt = $dbh->prepare($sql);
@@ -111,7 +94,7 @@
       <p class="data2"><a class="history" href="">2016年09月の日記</a></p><br>
       <p class="data2"><a class="history" href="">2016年08月の日記</a></p>
     </div>
-    <a href="add.php">日記を新しく追加する</a> 
+    <a href="diary.php">日記を新しく追加する</a> 
   </div>
   <div id="d-box">
    <h5 style="color: white; font-size: 13px">Copyright @ NexSeed inc All Rights Reserved</h5>
