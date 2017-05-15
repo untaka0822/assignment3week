@@ -1,50 +1,40 @@
 <?php
-session_start(); // $_SESSIONの使用条件
+session_start();
 require('dbconnect.php');
-
-if (isset($_SESSION['login_member_id']) && $_SESSION['time']+ 3600 > time()) {
-  $_SESSION['time'] = time();
-  $sql = 'SELECT * FROM `members` WHERE `member_id`=?';
-  $data = array($_SESSION['login_member_id']);
-  $stmt1 = $dbh->prepare($sql);
-  $stmt1->execute($data);
-  // $login_user = $stmt1->fetch(PDO::FETCH_ASSOC);
-
-  } else {
-    // ログインしていない場合
-    header('Location: login.php');
-    exit();
-  }
 
 // 各入力値を保持する変数を用意
 $title = '';
-$contents     = '';
+$contents = '';
 
 // エラー格納用の配列を用意
 $errors = array();
 
-// 『確認画面へ』ボタンが押されたとき
+// 確認画面へボタンが押されたとき
 if (!empty($_POST)) {
 
     $title = $_POST['title'];
     $contents = $_POST['contents'];
-        // タイトルのフォームが空のため、画面にエラーを出力
-    if ($title == '') {  
+
+    // ページ内バリデーション
+    if ($title == '') {
+        // ニックネームのフォームが空のため、画面にエラーを出力
         $errors['title'] = 'blank'; // blank部分はどんな文字列でも良い
     }
 
     if ($contents == '') {
         $errors['contents'] = 'blank';
     }
-    
+
+    // エラーがなかった場合の処理
+    if (empty($errors)) {
+
+      $_SESSION['join'] = $_POST; // joinは何でも良い
       header('Location: check_diary.php');
       exit();
-}
-    // header('Location: check_diary.php');
-    // exit();
+     }
+  }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -53,7 +43,7 @@ if (!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>NexSeed Diary 新しい日記</title>
+    <title>NexSeed Diary 新規日記登録</title>
 
     <!-- Bootstrap -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -89,19 +79,20 @@ if (!empty($_POST)) {
       <!-- /.container-fluid -->
   </nav>
 
+<!-- formのmethod="POST" action inputのsubmit 大事 -->
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 content-margin-top">
-        <legend>日記の登録</legend>
+        <legend>新しい日記の登録</legend>
         <form method="POST" action="" class="form-horizontal" role="form" enctype="multipart/form-data"><!-- enctypeがないと$_FILESが作成されない-->
           <!-- ニックネーム -->
           <div class="form-group">
             <label class="col-sm-4 control-label">日記のタイトル</label>
             <div class="col-sm-8">
-              <input type="text" name="title" class="form-control" value="<?php echo $title; ?>" placeholder="例： Harry Potter">
+              <input type="text" name="title" class="form-control" value="<?php echo $title; ?>" placeholder="例： Kawabe Imajin">
               <?php if(isset($errors['title']) && $errors['title'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
-                日記のタイトルを入力してください
+                タイトルを入力してください
               </p>
                <?php endif; ?>
             </div>
@@ -110,15 +101,15 @@ if (!empty($_POST)) {
           <div class="form-group">
             <label class="col-sm-4 control-label">日記の内容</label>
             <div class="col-sm-8">
-              <input type="contents" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： 今日はクディッチの試合だった"> 
+              <input type="contents" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： tyokusoubin@gmail.com"> 
               <?php if(isset($errors['contents']) && $errors['contents'] == 'blank'): ?> <!-- コロン構文 -->
-                <p style="color: red; font-size: 10px; margin-top: 2px;">日記の内容を入力してください</p>
+              <p style="color: red; font-size: 10px; margin-top: 2px;">
+                日記の内容を入力してください
+              </p>
               <?php endif; ?>
             </div>
           </div>
-
           <input type="submit" class="btn btn-default" value="確認画面へ">
-
         </form>
       </div>
     </div>
@@ -132,5 +123,3 @@ if (!empty($_POST)) {
 </html>
 
 
-
-  

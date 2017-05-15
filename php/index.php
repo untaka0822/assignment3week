@@ -92,7 +92,6 @@ if (!empty($_POST)) {
       $_SESSION['join'] = $_POST; // joinは何でも良い
       $_SESSION['join']['picture_path'] = $picture_name;
       
-      var_dump($_FILES);
 
       header('Location: check.php');
       exit();
@@ -154,7 +153,7 @@ if (!empty($_POST)) {
           <div class="form-group">
             <label class="col-sm-4 control-label">ニックネーム</label>
             <div class="col-sm-8">
-              <input type="text" name="nick_name" class="form-control" value="<?php echo $nick_name; ?>" placeholder="例： Kawabe Imajin">
+              <input type="text" name="nick_name" class="form-control" value="<?php echo $nick_name; ?>" placeholder="例： 神谷の一日">
               <?php if(isset($errors['nick_name']) && $errors['nick_name'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 ニックネームを入力してください
@@ -166,7 +165,7 @@ if (!empty($_POST)) {
           <div class="form-group">
             <label class="col-sm-4 control-label">メールアドレス</label>
             <div class="col-sm-8">
-              <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="例： tyokusoubin@gmail.com"> 
+              <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="例： sql文なんて余裕"> 
               <?php if(isset($errors['email']) && $errors['email'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 メールアドレスを入力してください

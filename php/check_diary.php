@@ -3,46 +3,62 @@ session_start();
 require('dbconnect.php');
 // index.phpで入力された内容を受取り表示する
 
-// $_SESSION スーパーグローバル変数
-
-// index.phpを正しく通って来なかった場合、強制的にindex.phpに遷移
+// $_SESSION['join']の判定
 if (!isset($_SESSION['join'])) { 
-    header('Location: 3week.php');
+    header('Location: login.php');
     exit();
 }
-// 会員登録ボタンが押された際
+
+// ログイン判定プログラム
+if (isset($_SESSION['login_member_id']) && $_SESSION['time']+ 3600 > time()) {
+    $_SESSION['time'] = time();
+    $sql = 'SELECT * FROM `members` WHERE `member_id`=? ';
+    $data = array($_SESSION['login_member_id']);
+    $stmt1 = $dbh->prepare($sql);
+    $stmt1->execute($data);
+    $login_user = $stmt1->fetch(PDO::FETCH_ASSOC);
+
+  } else {
+    // ログインしていない場合
+    header('Location: login.php');
+    exit();
+}
+
+// 完了ボタンを押したとき
 if (!empty($_POST)) {
     $title = $_SESSION['join']['title'];
     $contents = $_SESSION['join']['contents'];
-     
-    // DBに会員情報を登録
-    try{
-        // 例外が発生する可能性のある処理
-        $sql = 'INSERT INTO `diary` SET `title`=?, `contents`=?';
-        $data = array($title, $contents);
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute($data);
 
-        // $_SESSIONの情報を削除
+  try { 
+        // DBへの登録処理
+        $sql = 'INSERT INTO `diary` SET `diary_id`=?, `user_id`=?, `title`=?, `contents`=?, `created`=NOW()';
+        $data = array($diary_id, $login_user['member_id'], $title, $contents);
+        $stmt2 = $dbh->prepare($sql);
+        $stmt2->execute($data);
+
+        // unset = SESSIONの情報を削除
         unset($_SESSION['join']);
-
-        // thanks.phpへ遷移
+        
+        // 3week.phpへ遷移される
         header('Location: 3week.php');
         exit();
-
-    } catch(PDOException $e) {
-        // 例外が発生した場合の処理
-        echo 'SQL文実行時エラー: ' . $e->getMessage();
+        // エラー時に表示
+      } catch(PDOException $e){
+              // 例外が発生した場合の処理
+        echo 'SQL文実行時のエラー: ' . $e->getMessage();
         exit();
-    }
+      }
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>NexSeed Diary 確認</title>
+  <title>NexSeed Diary 新規日記確認</title>
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../assets/css/form.css" rel="stylesheet">
@@ -61,7 +77,6 @@ if (!empty($_POST)) {
   <br>
   <form method="POST" action="">  
     <input type="hidden" name="hoge" value="fuga">
-    <a href="diary.php"></a>
     <input type="submit" value="完了">
   </form>
 </body>
