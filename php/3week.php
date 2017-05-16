@@ -22,14 +22,51 @@
   $stmt->execute($data);
   $members = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  // // ページング機能
+  // $page = '';
+  // // パラメータのページ番号を取得
+  // if (isset($_REQUEST['page'])) {
+  //     $page = $_REQUEST['page'];
+  // }
+
+  // // パラメータが存在しない場合はページ番号を1とする
+  // if ($page == '') {
+  //     $page = 1;
+  // }
+
+  // // 1以下のイレギュラーな数値が入ってきた場合はページ番号を1とする
+  // $page = max($page, 1); // max ()の中に入った一番大きい数を出力 例: echo max(1, 10, 15, 1.9, 12.5) . '<br>'; の場合 15　が出力される
+
+  // // データの件数から最大ページ数を計算する
+  // $sql = 'SELECT COUNT(*) AS `cnt` FROM `diary`'; // 復習: tweetsテーブルからデータ全件の件数を数えて取得
+  // $data = array();
+  // $diary_stmt = $dbh->prepare($sql);
+  // $diary_stmt->execute();
+  // $diarys = $diary_stmt->fetch(PDO::FETCH_ASSOC);
+  // $max_page = ceil($diarys['cnt'] / 5); // ceil 小数点以下を切り上げ　(php 小数点　関数でggr)
+
+  // // パラメータのページ番号が最大ページ数を超えていれば、最後のページ数とする
+  // $page = min($page, $max_page); // min 最小値を返す
+
+  // // 1ページに表示する件数分だけデータを取得する
+  // $page = ceil($page);
+  // $start = ($page - 1) * 5;
+
   // 削除ボタンを押したとき
-  if (!empty($_POST)) {
+  if (!empty($_POST && $_POST['submit-type'] == 'delete')) {
 
     $sql = 'DELETE FROM `diary` WHERE `diary_id`=?';
     $data = array($_REQUEST['diary_id']);
     $re_stmt = $dbh->prepare($sql);
     $re_stmt->execute($data); // 大事！ 削除機能は取得sql文より前に書く 削除 → 取得 → 表示
 
+    }
+  // 編集ボタンを押したとき
+  if (!empty($_POST && $_POST['submit-type'] == 'edit')) {
+
+      $_SESSION['join'] = $_POST;
+      header('Location: edit.php');
+      exit();
     }
 
   // ログインしているユーザの日記を全件表示
@@ -68,15 +105,25 @@
             <form name="form3" method="POST" action="" onsubmit="return submitChk()"> <!-- onsubmitでダイアログの表示 -->
               <input class="btn-xs btn-info" type="submit" name="delete" value="削除" style="margin-bottom: 10px;">
               <input type="hidden" name="diary_id" value="<?php echo $diary['diary_id']; ?>">
+              <input type="hidden" name="submit-type" value="delete">
             </form>
-            <form name="form1">
+            <form name="form1" method="POST" action="">
               <input class="btn-xs btn-success" type="submit" name="edit" value="編集" style="margin-bottom: 10px;">
+              <input type="hidden" name="submit-type" value="edit">
               <input type="hidden" name="diary_id" value="<?php echo $diary['diary_id']; ?>">
+              <input type="hidden" name="title" value="<?php echo $diary['title']; ?>">
+              <input type="hidden" name="contents" value="<?php echo $diary['contents']; ?>">
+              <input type="hidden" name="created" value="<?php echo $diary['created']; ?>">
             </form>
         </div>
+      <?php  
+        // echo '<pre>';
+        // var_dump($diary);
+        // echo '</pre>';
+      ?>
       <?php endwhile; ?>
       <!-- ページング機能必要か？？？ -->
-      </div>
+     </div>
     </div>
   </div>
 
@@ -88,11 +135,11 @@
           date_default_timezone_set('Asia/Tokyo'); // 時間を日本に設定
           $time = intval(date('H'));
           if (6 <= $time && $time <= 11) { // 06:01～11:00の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px;">おはようございます、<?php echo $members['nick_name']; ?>さん</p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center;">Goodmorning! <?php echo $members['nick_name']; ?></p>
           <?php } elseif (11 <= $time && $time <= 17) { // 11:01〜17:59の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px;">こんにちわ、<?php echo $members['nick_name']; ?>さん</p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center;">Hello! <?php echo $members['nick_name']; ?></p>
           <?php } else { // それ以外の時間帯のとき (18:00 〜 05:59の時間帯) ?>
-          <p style="font-size: 20px; margin-top: 25px;">こんばんわ、<?php echo $members['nick_name']; ?>さん</p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center;">Good evening! <?php echo $members['nick_name']; ?></p>
       <?php } ?>
       <div class="data1"><a class="history" href="#">
       <?php
@@ -144,7 +191,7 @@
     */
     function submitChk () {
         /* 確認ダイアログ表示 */
-        var flag = confirm ( "本当に削除してもいいですか？いいんですね？削除しちゃいますよ？\n\n削除したくない場合はボタンを押す前に今年の抱負を叫んで下さい");
+        var flag = confirm ( "本当に削除してもいいですか？いいんですね？削除しちゃいますよ？\n\n削除したくない場合はボタンを押す前に今年の抱負を叫んでからキャンセル を押して下さい");
         /* send_flg が TRUEなら送信、FALSEなら送信しない */
         return flag;
     }

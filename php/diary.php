@@ -89,7 +89,7 @@ if (!empty($_POST)) {
           <div class="form-group">
             <label class="col-sm-4 control-label">日記のタイトル</label>
             <div class="col-sm-8">
-              <input type="text" name="title" class="form-control" value="<?php echo $title; ?>" placeholder="例： Kawabe Imajin">
+              <input type="text" name="title" class="form-control" value="<?php echo $title; ?>" placeholder="例： 神谷の一日">
               <?php if(isset($errors['title']) && $errors['title'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 タイトルを入力してください
@@ -101,7 +101,7 @@ if (!empty($_POST)) {
           <div class="form-group">
             <label class="col-sm-4 control-label">日記の内容</label>
             <div class="col-sm-8">
-              <input type="contents" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： tyokusoubin@gmail.com"> 
+              <input type="contents" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： スタバに行ってきたよ"> 
               <?php if(isset($errors['contents']) && $errors['contents'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 日記の内容を入力してください
