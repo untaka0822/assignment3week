@@ -90,7 +90,7 @@
 
 <body>
 <div id="a-box">
-  <h2 style="color: yellow; font-size: 40px; margin-right: -400px">NexSeed Diary <a class="btn btn-primary" href="logout.php" style="margin-left: 300px;">ログアウト</a>
+  <h2 style="color: yellow; font-size: 40px; margin-right: -400px">NexSeed Diary <a class="btn btn-danger" href="logout.php" style="margin-left: 300px;">ログアウト</a>
   </h2>
 </div>
 
@@ -127,7 +127,7 @@
     </div>
   </div>
 
-  <div id="c-box">
+  <div id="c-box" style="text-align: center">
     <div class="content2">
     <img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 100%;
   height: 64%;">
@@ -179,7 +179,7 @@
       ?>の日記
       </a></div><br>
     </div>
-    <a href="diary.php">日記を新しく追加する</a> 
+    <a href="diary.php" class="btn btn-warning">日記を新しく追加する</a> 
   </div>
   <div id="d-box">
    <h5 style="color: white; font-size: 13px">Copyright @ NexSeed inc All Rights Reserved</h5>

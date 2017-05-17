@@ -72,6 +72,7 @@ if (!empty($_POST)) {
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
+                <li><a href="logout.php" class="btn-xs btn-danger" style="color: white;">ログアウト</a></li>
               </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -101,7 +102,7 @@ if (!empty($_POST)) {
           <div class="form-group">
             <label class="col-sm-4 control-label">日記の内容</label>
             <div class="col-sm-8">
-              <input type="contents" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： スタバに行ってきたよ"> 
+              <textarea type="contents" cols="100" rows="4" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： スタバに行ってきたよ"></textarea> 
               <?php if(isset($errors['contents']) && $errors['contents'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 日記の内容を入力してください
@@ -109,7 +110,10 @@ if (!empty($_POST)) {
               <?php endif; ?>
             </div>
           </div>
-          <input type="submit" class="btn btn-default" value="確認画面へ">
+          <div class="row" style="text-align: center;">
+          <a class="btn btn-info" href="3week.php" style="margin-right: 20px">一覧へ戻る</a>
+          <input type="submit" class="btn btn-success" value="確認画面へ">
+          </div>
         </form>
       </div>
     </div>

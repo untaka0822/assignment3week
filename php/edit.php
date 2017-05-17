@@ -92,7 +92,7 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout.php" class="btn-xs btn-primary" style="color: white;">ログアウト</a></li>
+                <li><a href="logout.php" class="btn-xs btn-danger" style="color: white;">ログアウト</a></li>
               </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -125,10 +125,10 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
 	            <?php echo $_SESSION['join']['created']; ?>
               <input type="hidden" name="created">
 	          </p>
-	          <input type="submit" value="更新" class="btn btn-warning btn-xs">
+            <a href="3week.php">&laquo;&nbsp;一覧へ戻る</a>
+            <input type="submit" value="更新" class="btn btn-warning btn-xs" style="text-align: center;">
 	        </div> 
         </form>
-        <a href="3week.php">&laquo;&nbsp;一覧へ戻る</a>
       </div>
     </div>
   </div>
