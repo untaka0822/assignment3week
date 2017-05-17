@@ -1,4 +1,7 @@
-
+body {
+  background-image: url(../member_picture/Hayato.jpg);
+  background-size: cover;
+}
 
 #a-box {
   text-align: center;
@@ -17,10 +20,17 @@
   border: 1px ridge #e5e5e5;
   margin: 10px 10px 10px 10px;
   padding-top: 10px;
-  padding-left: 10px;   
+  padding-left: 10px;
+  background-color: white;
+  border-radius: 5px;
 }
 .date {
   font-size: 6px;
+}
+
+.data1 {
+  background-color: white;
+  border-radius: 10px;
 }
 
 #c-box {
