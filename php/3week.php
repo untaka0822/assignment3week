@@ -43,6 +43,9 @@
   $diary_stmt = $dbh->prepare($sql);
   $diary_stmt->execute();
   $diarys = $diary_stmt->fetch(PDO::FETCH_ASSOC);
+  // echo '<pre>';
+  // var_dump($diarys);
+  // echo '</pre>';
   $max_page = ceil($diarys['cnt'] / 5); // ceil 小数点以下を切り上げ　(php 小数点　関数でggr)
 
   // パラメータのページ番号が最大ページ数を超えていれば、最後のページ数とする
@@ -73,7 +76,7 @@
 
     // ログインしているユーザの日記を全件表示
     // $sql = sprintf('SELECT t.*, m.nick_name, m.picture_path FROM `tweets` t LEFT JOIN `members` m ON t.member_id=m.member_id ORDER BY t.created DESC LIMIT %d, 5', $start); // sprintf 引数に指定した値を指定の形式にフォーマットした文字列を取得 %d 整数値
-    $sql = sprintf('SELECT * FROM `diary` WHERE `user_id`=? ORDER BY diary_id DESC LIMIT %d, 5', $start);
+    $sql = sprintf('SELECT * FROM `diary` WHERE `user_id`=? ORDER BY diary.created DESC LIMIT %d, 5', $start); // 最新順
     $data = array($_SESSION['login_member_id']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
@@ -126,6 +129,7 @@
       ?>
       <?php endwhile; ?>
       <!-- ページング機能必要か？？？ -->
+      <?php // if ($max_page > 4): ?>
       <ul class="paging">
           <?php
             $word = '';
@@ -133,7 +137,8 @@
                 $word = '&search_word=' . $_GET['search_word'];
             }
           ?>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+          <!-- ページングボタンが押された時に変わる -->
+          <div class="col-xs-6 col-lg-offset-2">
             <?php if($page > 1): ?>
                 <button style="background-color: yellow"><a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>">前</a></button>
             <?php else: ?>
@@ -146,23 +151,25 @@
             <?php else: ?>
                 <button>次</button>
             <?php endif; ?>
+          </div>
       </ul>
+    <?php // endif; ?>
      </div>
     </div>
   </div>
 
   <div id="c-box" style="text-align: center">
     <div class="content2">
-    <img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 100%; height: 64%; border-radius: 5px">
+    <img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 100%; height: 72%; border-radius: 5px">
       <?php
           date_default_timezone_set('Asia/Tokyo'); // 時間を日本に設定
           $time = intval(date('H'));
           if (6 <= $time && $time <= 11) { // 06:01～11:00の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center;">Goodmorning! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; border-radius: 15px;">Goodmorning! <?php echo $members['nick_name']; ?></p>
           <?php } elseif (11 <= $time && $time <= 17) { // 11:01〜17:59の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center;">Hello! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; border-radius: 15px;">Hello! <?php echo $members['nick_name']; ?></p>
           <?php } else { // それ以外の時間帯のとき (18:00 〜 05:59の時間帯) ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center;">Good evening! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; border-radius: 15px;">Good evening! <?php echo $members['nick_name']; ?></p>
       <?php } ?>
       <div class="data1"><a class="history" href="#">
       <?php

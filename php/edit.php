@@ -125,7 +125,7 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
 	            <?php echo $_SESSION['join']['created']; ?>
               <input type="hidden" name="created">
 	          </p>
-            <a href="3week.php">&laquo;&nbsp;一覧へ戻る</a>
+            <a href="3week.php" class="btn btn-info btn-xs">一覧へ戻る</a>
             <input type="submit" value="更新" class="btn btn-warning btn-xs" style="text-align: center;">
 	        </div> 
         </form>
