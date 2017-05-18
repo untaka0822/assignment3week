@@ -41,13 +41,14 @@
   $sql = 'SELECT COUNT(*) AS `cnt` FROM `diary`'; // 復習: tweetsテーブルからデータ全件の件数を数えて取得
   $data = array();
   $diary_stmt = $dbh->prepare($sql);
-  $diary_stmt->execute();
+  $diary_stmt->execute($data);
   $diarys = $diary_stmt->fetch(PDO::FETCH_ASSOC);
   // echo '<pre>';
   // var_dump($diarys);
   // echo '</pre>';
   $max_page = ceil($diarys['cnt'] / 5); // ceil 小数点以下を切り上げ　(php 小数点　関数でggr)
-
+  // ページング機能調整
+  $max_page = $max_page - 1;
   // パラメータのページ番号が最大ページ数を超えていれば、最後のページ数とする
   $page = min($page, $max_page); // min 最小値を返す
 
@@ -129,7 +130,6 @@
       ?>
       <?php endwhile; ?>
       <!-- ページング機能必要か？？？ -->
-      <?php // if ($max_page > 4): ?>
       <ul class="paging">
           <?php
             $word = '';
@@ -139,6 +139,7 @@
           ?>
           <!-- ページングボタンが押された時に変わる -->
           <div class="col-xs-6 col-lg-offset-2">
+          <p style="color: white;"><?php echo $page . 'ページ目'; ?></p>
             <?php if($page > 1): ?>
                 <button style="background-color: yellow"><a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>">前</a></button>
             <?php else: ?>
@@ -153,7 +154,6 @@
             <?php endif; ?>
           </div>
       </ul>
-    <?php // endif; ?>
      </div>
     </div>
   </div>
@@ -165,11 +165,11 @@
           date_default_timezone_set('Asia/Tokyo'); // 時間を日本に設定
           $time = intval(date('H'));
           if (6 <= $time && $time <= 11) { // 06:01～11:00の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; border-radius: 15px;">Goodmorning! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: deepskyblue;border-radius: 15px;">Goodmorning! <?php echo $members['nick_name']; ?></p>
           <?php } elseif (11 <= $time && $time <= 17) { // 11:01〜17:59の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; border-radius: 15px;">Hello! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: deepskyblue;border-radius: 15px;">Hello! <?php echo $members['nick_name']; ?></p>
           <?php } else { // それ以外の時間帯のとき (18:00 〜 05:59の時間帯) ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; border-radius: 15px;">Good evening! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: deepskyblue;border-radius: 15px;">Good evening! <?php echo $members['nick_name']; ?></p>
       <?php } ?>
       <div class="data1"><a class="history" href="#">
       <?php
