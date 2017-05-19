@@ -2,6 +2,10 @@
 session_start();
 require('dbconnect.php');
 
+// $_SESSION = array();
+// unset($_SESSION);
+// session_destroy();
+
 $email='';
 $password='';
 
@@ -38,7 +42,7 @@ if (!empty($_POST)) {
 		} else {
 			  // されていなければログイン処理
 				// echo 'ログイン処理成功';
-		$_SESSION['login_member_id'] = $record['member_id'];
+		    $_SESSION['login_member_id'] = $record['member_id'];
         $_SESSION['time'] = time();
 
 

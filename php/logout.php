@@ -10,7 +10,7 @@ if (ini_get("session.use_cookies")) {
 	setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 }
 
-session_destroy(); //上記が定型文
+session_destroy(); // SESSIONの情報を消す
 
 // COOKIE情報も削除
 setcookie('email', '', time() - 3000);

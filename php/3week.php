@@ -8,6 +8,8 @@
   $data = array($_SESSION['login_member_id']);
   $stmt1 = $dbh->prepare($sql);
   $stmt1->execute($data);
+  $members = $stmt1->fetch(PDO::FETCH_ASSOC);
+
 
   } else {
     // ログインしていない場合
@@ -15,12 +17,9 @@
     exit();
   }
 
-  // membersテーブルからログインしているユーザーのデータを取得
-  $sql = 'SELECT * FROM `members` WHERE `member_id`=?';
-  $data = array($_SESSION['login_member_id']);
-  $stmt2 = $dbh->prepare($sql);
-  $stmt2->execute($data);
-  $members = $stmt2->fetch(PDO::FETCH_ASSOC);
+  // echo '<pre>';
+  // var_dump($_SESSION['login_member_id']);
+  // echo '</pre>';
 
   // ページング機能
   $page = '';
@@ -38,25 +37,23 @@
   $page = max($page, 1); // max ()の中に入った一番大きい数を出力 例: echo max(1, 10, 15, 1.9, 12.5) . '<br>'; の場合 15　が出力される
 
   // データの件数から最大ページ数を計算する
-  $sql = 'SELECT COUNT(*) AS `cnt` FROM `diary`'; // 復習: tweetsテーブルからデータ全件の件数を数えて取得
-  $data = array();
+  $sql = 'SELECT COUNT(*) AS `cnt` FROM `diary` WHERE `user_id`=?'; // 復習: tweetsテーブルからデータ全件の件数を数えて取得
+  $data = array($_SESSION['login_member_id']);
   $diary_stmt = $dbh->prepare($sql);
   $diary_stmt->execute($data);
   $diarys = $diary_stmt->fetch(PDO::FETCH_ASSOC);
-  // echo '<pre>';
-  // var_dump($diarys);
-  // echo '</pre>';
+
   $max_page = ceil($diarys['cnt'] / 5); // ceil 小数点以下を切り上げ　(php 小数点　関数でggr)
   // ページング機能調整
-  $max_page = $max_page - 1;
+  $max_page = $max_page + 1;
   // パラメータのページ番号が最大ページ数を超えていれば、最後のページ数とする
   $page = min($page, $max_page); // min 最小値を返す
+  $page = max($page, 1); // max 0以下のページの際
 
   // 1ページに表示する件数分だけデータを取得する
   $page = ceil($page);
-  // echo '現在のページ数 : ' . $page;
+  // 1~ , 6~ , 11~のスタートにする
   $start = ($page - 1) * 5;
-
   // 削除ボタンを押したとき
   if (!empty($_POST && $_POST['submit-type'] == 'delete')) {
 
@@ -125,7 +122,7 @@
         </div>
       <?php  
         // echo '<pre>';
-        // var_dump($diary);
+        // var_dump($members);
         // echo '</pre>';
       ?>
       <?php endwhile; ?>
