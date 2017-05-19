@@ -94,7 +94,7 @@
 
 <body>
 <div id="a-box">
-  <h2 style="color: yellow; font-size: 40px; margin-right: -400px">NexSeed Diary <a class="btn btn-danger" href="logout.php" style="margin-left: 300px;">ログアウト</a>
+  <a href="3week.php" style="color: yellow; font-size: 40px; margin-left: 375px">NexSeed Diary </a><a class="btn btn-danger" href="logout.php" style="margin-left: 300px;">ログアウト</a>
   </h2>
 </div>
 
@@ -126,7 +126,7 @@
         // echo '</pre>';
       ?>
       <?php endwhile; ?>
-      <!-- ページング機能必要か？？？ -->
+
       <ul class="paging">
           <?php
             $word = '';
@@ -136,7 +136,7 @@
           ?>
           <!-- ページングボタンが押された時に変わる -->
           <div class="col-xs-6 col-lg-offset-2">
-          <p style="color: white;"><?php echo $page . 'ページ目'; ?></p>
+          <p style="color: white;"><?php echo $page . 'ページ目' . ' / ' . $max_page . 'ページ'; ?></p>
             <?php if($page > 1): ?>
                 <button style="background-color: yellow"><a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>">前</a></button>
             <?php else: ?>
@@ -218,7 +218,7 @@
     */
     function submitChk () {
         /* 確認ダイアログ表示 */
-        var flag = confirm ( "本当に削除してもいいですか？いいんですね？削除しちゃいますよ？\n\n削除したくない場合はボタンを押す前に今年の抱負を叫んでからキャンセルを押して下さい");
+        var flag = confirm ( "本当に削除してもいいですか?\n\n削除されない方はキャンセルボタンを押してください");
         /* send_flg が TRUEなら送信、FALSEなら送信しない */
         return flag;
     }
