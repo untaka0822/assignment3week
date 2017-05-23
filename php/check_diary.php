@@ -24,6 +24,10 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time']+ 3600 > time()) {
     exit();
 }
 
+// echo '<pre>';
+// var_dump($login_user);
+// echo '</pre>';
+
 // 完了ボタンを押したとき
 if (!empty($_POST)) {
     $title = $_SESSION['join']['title'];
@@ -52,6 +56,8 @@ if (!empty($_POST)) {
 
 
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -75,8 +81,8 @@ if (!empty($_POST)) {
     <?php echo $_SESSION['join']['contents']; ?>
   </div>
   <br>
-  <form method="POST" action="">  
-    <input type="hidden" name="hoge" value="fuga">
+  <form method="POST" action="">
+    <input type="hidden" name="hoge" value="fuga"> <!-- 値を表示せずにDBに保存するときはhidden -->
     <input type="submit" value="完了">
   </form>
 </body>

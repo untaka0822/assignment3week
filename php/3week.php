@@ -2,6 +2,7 @@
   session_start();
   require('dbconnect.php');
   
+  // ログイン判定
   if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
   $_SESSION['time'] = time();
   $sql = 'SELECT * FROM `members` WHERE `member_id`=?';
@@ -54,6 +55,30 @@
   $page = ceil($page);
   // 1~ , 6~ , 11~のスタートにする
   $start = ($page - 1) * 5;
+
+  // お気に入り!ボタンが押された時
+  if (!empty($_POST && $_POST['submit-type'] == 'like')) {
+    if ($_POST['like'] == 'like') {
+      // いいね！された時の処理
+      $sql = 'INSERT INTO `likes` SET `member_id`=?, `diary_id`=?'; // SETの時は , WHEREの時は AND
+      $data = array($_SESSION['login_member_id'], $_POST['like_diary_id']);
+      $like_stmt = $dbh->prepare($sql);
+      $like_stmt->execute($data);
+      // header('Location: 3week.php'); あってもいい
+      // exit();
+
+    } else {
+      //いいね！取り消しされた時の処理
+      $sql = 'DELETE FROM `likes` WHERE `member_id`=? AND `diary_id`=?';
+      $data = array($_SESSION['login_member_id'], $_POST['like_diary_id']);
+      $like_stmt = $dbh->prepare($sql);
+      $like_stmt->execute($data);
+      // header('Location: 3week.php'); なくてもいい
+      // exit();
+
+    }
+  }
+
   // 削除ボタンを押したとき
   if (!empty($_POST && $_POST['submit-type'] == 'delete')) {
 
@@ -74,7 +99,7 @@
 
     // ログインしているユーザの日記を全件表示
     // $sql = sprintf('SELECT t.*, m.nick_name, m.picture_path FROM `tweets` t LEFT JOIN `members` m ON t.member_id=m.member_id ORDER BY t.created DESC LIMIT %d, 5', $start); // sprintf 引数に指定した値を指定の形式にフォーマットした文字列を取得 %d 整数値
-    $sql = sprintf('SELECT * FROM `diary` WHERE `user_id`=? ORDER BY diary.created DESC LIMIT %d, 5', $start); // 最新順
+    $sql = sprintf('SELECT * FROM `diary` WHERE `user_id`=? ORDER BY diary.created DESC LIMIT %d, 5', $start); // 最新順 sprintf()で文字列を使用可能にする
     $data = array($_SESSION['login_member_id']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
@@ -104,8 +129,9 @@
       <!-- ログインしているユーザーの日記を全件表示 -->
       <?php while($diary = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
         <div class="diary">
-              <a href="detail_diary.php"><?php echo $diary['title']; ?></a><br>
+              <a href="detail_diary.php" style="font-size: 18px;"><?php echo $diary['title']; ?></a><br>
               <p class="date"><?php echo $diary['created']; ?></p>
+              
             <form name="form2" method="POST" action="" onsubmit="return submitChk()"> <!-- onsubmitでダイアログの表示 -->
               <input class="btn-xs btn-info" type="submit" name="delete" value="削除" style="margin-bottom: 10px;">
               <input type="hidden" name="diary_id" value="<?php echo $diary['diary_id']; ?>">
@@ -118,6 +144,35 @@
               <input type="hidden" name="title" value="<?php echo $diary['title']; ?>">
               <input type="hidden" name="contents" value="<?php echo $diary['contents']; ?>">
               <input type="hidden" name="created" value="<?php echo $diary['created']; ?>">
+            </form>
+            <?php
+            // お気に入り！をしているかの判定処理
+              $sql = 'SELECT * FROM `likes` WHERE `member_id`=? AND `diary_id`=?';
+              $data = array($_SESSION['login_member_id'], $diary['diary_id']);
+              $is_like_stmt = $dbh->prepare($sql);
+              $is_like_stmt->execute($data);
+
+              // // お気に入り！数カウント処理
+              // $sql = 'SELECT COUNT(*) AS total FROM `likes` WHERE `diary_id`=?';
+              // $data = array($diary['diary_id']);
+              // $count_stmt = $dbh->prepare($sql);
+              // $count_stmt->execute($data);
+              // $count = $count_stmt->fetch(PDO::FETCH_ASSOC);
+            ?>
+            <form name="form1" method="POST" action=""> 
+              <?php if($is_like_stmt = $is_like_stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                <!-- お気に入りデータが存在する(削除ボタン表示) -->
+                <input type="hidden" name="like" value="unlike">
+                <input type="hidden" name="like_diary_id" value="<?php echo $diary['diary_id']; ?>">
+                <input type="hidden" name="submit-type" value="like">
+                <input type="submit" value="Return" class="btn-xs btn-danger">
+              <?php else: ?>
+                <!-- お気に入りデータが存在しない(いいねボタン表示) -->
+                <input type="hidden" name="like" value="like">
+                <input type="hidden" name="like_diary_id" value="<?php echo $diary['diary_id']; ?>">
+                <input type="hidden" name="submit-type" value="like">
+                <input type="submit" value="Favorite" class="btn-xs btn-primary">
+              <?php endif; ?>
             </form>
         </div>
       <?php  
@@ -136,7 +191,7 @@
           ?>
           <!-- ページングボタンが押された時に変わる -->
           <div class="col-xs-6 col-lg-offset-2">
-          <p style="color: white;"><?php echo $page . 'ページ目' . ' / ' . $max_page . 'ページ'; ?></p>
+          <p style="color: white;"><?php echo $page . 'ページ目'; ?></p>
             <?php if($page > 1): ?>
                 <button style="background-color: yellow"><a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>">前</a></button>
             <?php else: ?>
@@ -211,8 +266,7 @@
   <div id="d-box">
    <h5 style="color: white; font-size: 13px">Copyright @ NexSeed inc All Rights Reserved</h5>
   </div>
-</div>
-<script>
+ <script>
     /**
      * 確認ダイアログの返り値によりフォーム送信
     */
@@ -222,6 +276,6 @@
         /* send_flg が TRUEなら送信、FALSEなら送信しない */
         return flag;
     }
-</script>
+ </script>
 </body>
 </html>

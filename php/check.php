@@ -38,7 +38,7 @@ if (!empty($_POST)) {
         exit();
 
     } catch(PDOException $e) {
-        // 例外が発生した場合の処理
+        // 例外が発生した場合の処理 
         echo 'SQL文実行時エラー: ' . $e->getMessage();
         exit();
     }
