@@ -5,6 +5,7 @@ require('dbconnect.php');
 // 各入力値を保持する変数を用意
 $title = '';
 $contents = '';
+$picture_path = '';
 
 // エラー格納用の配列を用意
 $errors = array();
@@ -25,10 +26,36 @@ if (!empty($_POST)) {
         $errors['contents'] = 'blank';
     }
 
-    // エラーがなかった場合の処理
+    // 画像について
     if (empty($errors)) {
 
+      // 画像のバリデーション
+      $file_name = $_FILES['picture_path']['name'];
+      // name部分は固定、picture_path部分はinputタグのtype="file"のname部分
+      if (!empty($file_name)) {
+         // 画像が選択されていた場合
+        $ext = substr($file_name, -3); // $_file_nameから拡張子部分取得
+        $ext = strtolower($ext); // 指定したstring内の文字を小文字にする
+        if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif') {
+            $errors['picture_path'] = 'type';
+        }
+      } else {
+          // 画像が未選択の場合
+        $errors['picture_path'] = 'blank';
+      }
+     }
+
+      // エラーがなかった場合の処理
+    if (empty($errors)) {
+      // 画像をアップロード処理
+       $picture_name = date('YmdHis') . $file_name;
+       // 201703081525untaka0822.jpg = 画像ファイル名作成
+       move_uploaded_file($_FILES['picture_path']['tmp_name'], '../diary_picture/' . $picture_name);
+
       $_SESSION['join'] = $_POST; // joinは何でも良い
+      $_SESSION['join']['picture_path'] = $picture_name;
+      
+
       header('Location: check_diary.php');
       exit();
      }
@@ -107,6 +134,30 @@ if (!empty($_POST)) {
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 日記の内容を入力してください
               </p>
+              <?php endif; ?>
+            </div>
+          </div>
+           <!-- プロフィール写真 -->
+          <div class="form-group">
+            <label class="col-sm-4 control-label">プロフィール写真</label>
+            <div class="col-sm-8">
+              <input type="file" name="picture_path" class="form-control" value="<?php echo $picture_path; ?>">
+              <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'blank'): ?> <!-- コロン構文 -->
+                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                 プロフィール画像を選択してください
+                </p>
+              <?php endif; ?>
+
+              <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'type'): ?> <!-- コロン構文 -->
+                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                  プロフィール画像は「.jpg」「.png」「.gif」の画像を選択してください
+                </p>
+              <?php endif; ?>
+
+              <?php if(!empty($errors)): ?> <!-- コロン構文 -->
+                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                  再度、プロフィール画像を指定してください
+                </p>
               <?php endif; ?>
             </div>
           </div>

@@ -1,6 +1,11 @@
 <?php
   session_start();
   require('dbconnect.php');
+
+  if (!isset($_SESSION['login_member_id'])) {
+    header('Location: login.php');
+    exit();
+  }
   
   // ログイン判定
   if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
@@ -24,6 +29,7 @@
 
   // ページング機能
   $page = '';
+
   // パラメータのページ番号を取得
   if (isset($_REQUEST['page'])) {
       $page = $_REQUEST['page'];
@@ -96,6 +102,12 @@
       exit();
 
     }
+  // 退会ボタンが押された時
+  if (!empty($_POST && $_POST['submit-type'] == 'leave')) {
+      $_SESSION['join'] = $_POST;
+      header('Location: leave.php');
+      exit();
+  }
 
     // ログインしているユーザの日記を全件表示
     // $sql = sprintf('SELECT t.*, m.nick_name, m.picture_path FROM `tweets` t LEFT JOIN `members` m ON t.member_id=m.member_id ORDER BY t.created DESC LIMIT %d, 5', $start); // sprintf 引数に指定した値を指定の形式にフォーマットした文字列を取得 %d 整数値
@@ -115,12 +127,18 @@
   <title>NexSeed Diary</title>
   <link rel="stylesheet" type="text/css" href="../css/3week.css">
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+  <script type="text/javascript" src="../resource/lightbox_plus.js"></script>
 </head>
 
 <body>
 <div id="a-box">
-  <a href="3week.php" style="color: yellow; font-size: 40px; margin-left: 375px">NexSeed Diary </a><a class="btn btn-danger" href="logout.php" style="margin-left: 300px;">ログアウト</a>
-  </h2>
+  <form method="POST" action="">
+  <input type="submit" value="退会する" class="btn btn-danger" style="padding: 5px 20px; border-radius: 5px;">
+  <input type="hidden" name="member_id" value="<?php echo $_SESSION['login_member_id']; ?>">
+  <input type="hidden" name="submit-type" value="leave">
+  <a href="3week.php" style="color: yellow; font-size: 40px; margin-left: 365px">NexSeed Diary </a><a class="btn btn-danger" href="logout.php" style="margin-left: 300px;">ログアウト</a>
+  </form>
 </div>
 
   <div id="b-box">
@@ -129,9 +147,9 @@
       <!-- ログインしているユーザーの日記を全件表示 -->
       <?php while($diary = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
         <div class="diary">
-              <a href="detail_diary.php" style="font-size: 18px;"><?php echo $diary['title']; ?></a><br>
+              <a href="detail_diary.php?diary_id=<?php echo $diary['diary_id']; ?>" style="font-size: 25px;"><?php echo $diary['title']; ?></a><br>
+              <a href="../diary_picture/<?php echo $diary['picture_path']; ?>" rel="lightbox"><img src="../diary_picture/<?php echo $diary['picture_path']; ?>"" class="effectable" style="width: 24%; height: 32%; border-radius: 5px;"></a> <!-- hrefの後の?の後を次のページで取得するのが$_REQUEST -->
               <p class="date"><?php echo $diary['created']; ?></p>
-              
             <form name="form2" method="POST" action="" onsubmit="return submitChk()"> <!-- onsubmitでダイアログの表示 -->
               <input class="btn-xs btn-info" type="submit" name="delete" value="削除" style="margin-bottom: 10px;">
               <input type="hidden" name="diary_id" value="<?php echo $diary['diary_id']; ?>">
@@ -152,12 +170,6 @@
               $is_like_stmt = $dbh->prepare($sql);
               $is_like_stmt->execute($data);
 
-              // // お気に入り！数カウント処理
-              // $sql = 'SELECT COUNT(*) AS total FROM `likes` WHERE `diary_id`=?';
-              // $data = array($diary['diary_id']);
-              // $count_stmt = $dbh->prepare($sql);
-              // $count_stmt->execute($data);
-              // $count = $count_stmt->fetch(PDO::FETCH_ASSOC);
             ?>
             <form name="form1" method="POST" action=""> 
               <?php if($is_like_stmt = $is_like_stmt->fetch(PDO::FETCH_ASSOC)): ?>
@@ -193,36 +205,36 @@
           <div class="col-xs-6 col-lg-offset-2">
           <p style="color: white;"><?php echo $page . 'ページ目'; ?></p>
             <?php if($page > 1): ?>
-                <button style="background-color: yellow"><a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>">前</a></button>
+                <a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>" class="btn btn-warning">前</a>
             <?php else: ?>
-                <button>前</button>
+                <a href="" class="btn btn-default">前</a>
             <?php endif; ?>
 
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <?php if($page < $max_page - 1): ?>
-                <button style="background-color: yellow"><a href="3week.php?page=<?php echo $page + 1; ?><?php echo $word; ?>">次</a></button>
+                <a href="3week.php?page=<?php echo $page + 1; ?><?php echo $word; ?>" class="btn btn-warning">次</a>
             <?php else: ?>
-                <button>次</button>
+                <a href="" class="btn btn-default">次</a>
             <?php endif; ?>
           </div>
       </ul>
      </div>
     </div>
   </div>
-
   <div id="c-box" style="text-align: center">
     <div class="content2">
-    <img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 100%; height: 72%; border-radius: 5px">
+    <a href="../member_picture/<?php echo $members['picture_path']; ?>" rel="lightbox"><img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 100%; height: 72%; border-radius: 5px" class="effectable"></a>
       <?php
           date_default_timezone_set('Asia/Tokyo'); // 時間を日本に設定
           $time = intval(date('H'));
           if (6 <= $time && $time <= 11) { // 06:01～11:00の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: deepskyblue;border-radius: 15px;">Goodmorning! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;">Goodmorning!</p>
           <?php } elseif (11 <= $time && $time <= 17) { // 11:01〜17:59の時間帯のとき ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: deepskyblue;border-radius: 15px;">Hello! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;">Hello!</p>
           <?php } else { // それ以外の時間帯のとき (18:00 〜 05:59の時間帯) ?>
-          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: deepskyblue;border-radius: 15px;">Good evening! <?php echo $members['nick_name']; ?></p>
+          <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;">Good evening!</p>
       <?php } ?>
+    <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;"><?php echo $members['nick_name']; ?>さん</p>
       <div class="data1"><a class="history" href="#">
       <?php
         // 日記の最新から3個目まで表示

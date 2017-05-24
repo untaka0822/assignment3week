@@ -1,14 +1,9 @@
-body {
-  background-image: url(../member_picture/Hayato.jpg);
-  background-size: cover;
-  background-position: fixed;
-}
+
 
 #a-box {
   text-align: center;
   padding-top: 3px;
-  padding-bottom: 10px; 
-  background-color: deepskyblue;
+  padding-bottom: 10px;
 }
 
 #b-box {
@@ -63,9 +58,5 @@ a.history {
 }
 
 #d-box {
-  margin-top: 600px;
-  clear: both;
-	text-align: center;
-  height: 40px;
-  background-color: deepskyblue;
+  
 }

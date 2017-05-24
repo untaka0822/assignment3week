@@ -32,11 +32,12 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time']+ 3600 > time()) {
 if (!empty($_POST)) {
     $title = $_SESSION['join']['title'];
     $contents = $_SESSION['join']['contents'];
+    $picture_path = $_SESSION['join']['picture_path'];
 
   try { 
         // DBへの登録処理
-        $sql = 'INSERT INTO `diary` SET `diary_id`=?, `user_id`=?, `title`=?, `contents`=?, `created`=NOW()';
-        $data = array($diary_id, $login_user['member_id'], $title, $contents);
+        $sql = 'INSERT INTO `diary` SET `diary_id`=?, `user_id`=?, `title`=?, `contents`=?, `picture_path`=?, `created`=NOW()';
+        $data = array($diary_id, $login_user['member_id'], $title, $contents, $picture_path);
         $stmt2 = $dbh->prepare($sql);
         $stmt2->execute($data);
 
@@ -54,11 +55,10 @@ if (!empty($_POST)) {
       }
 }
 
-
-
-
-
 ?>
+
+<br>
+<br>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -72,18 +72,49 @@ if (!empty($_POST)) {
     <link href="../assets/css/main.css" rel="stylesheet">
 </head>
 <body>
-  <div>
-    日記のタイトル：<br>
-    <?php echo $_SESSION['join']['title']; ?>
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title"><i class="fa fa-twitter-square"></i> NexSeed Diary</span></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+
+ <div class="container" style="text-align: center">
+  <div class="row">
+    <div style="font-size: 20px;">
+      日記のタイトル：<br>
+      <?php echo $_SESSION['join']['title']; ?>
+    </div>
+    <div style="font-size: 20px;">
+      日記の内容：<br>
+      <?php echo $_SESSION['join']['contents']; ?>
+    </div>
+    <div style="font-size: 20px;">
+      日記の写真 : <br>
+       <img src="../diary_picture/<?php echo $_SESSION['join']['picture_path']; ?>" style="width: 24%; height: 32%; border-radius: 5px;">
+    </div>
+    <br>
+    <form method="POST" action="">
+      <a href="diary.php" class="btn btn-default">戻る</a>
+      <input type="hidden" name="hoge" value="fuga"> <!-- 値を表示せずにDBに保存するときはhidden -->
+      <input type="submit" value="完了" class="btn btn-default">
+    </form>
   </div>
-  <div>
-    日記の内容：<br>
-    <?php echo $_SESSION['join']['contents']; ?>
-  </div>
-  <br>
-  <form method="POST" action="">
-    <input type="hidden" name="hoge" value="fuga"> <!-- 値を表示せずにDBに保存するときはhidden -->
-    <input type="submit" value="完了">
-  </form>
+ </div>
 </body>
 </html>

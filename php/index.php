@@ -132,7 +132,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html"><span class="strong-title"><i class="fa fa-twitter-square"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="index.php"><span class="strong-title"><i class="fa fa-twitter-square"></i> NexSeed Diary</span></a><a href="login.php" class="btn btn-default" style="margin-top: 10px; margin-left: 600px;"> 会員の方はこちら</a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -219,10 +219,11 @@ if (!empty($_POST)) {
                   再度、プロフィール画像を指定してください
                 </p>
               <?php endif; ?>
-            </d iv>
+            </div>
           </div>
-
-          <input type="submit" class="btn btn-default" value="確認画面へ">
+          <div style="text-align: center;">
+          <input type="submit" class="btn btn-default" value="確認画面へ" style="margin-top: 10px;">
+          </div>
         </form>
       </div>
     </div>

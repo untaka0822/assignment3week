@@ -45,6 +45,9 @@ if (!empty($_POST)) {
 }
 ?>
 
+<br>
+<br>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -55,26 +58,52 @@ if (!empty($_POST)) {
     <link href="../assets/css/form.css" rel="stylesheet">
     <link href="../assets/css/timeline.css" rel="stylesheet">
     <link href="../assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/check_diary.css">
 </head>
 <body>
-  <div>
-    ニックネーム：<br>
-    <?php echo $_SESSION['join']['nick_name']; ?>
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.php"><span class="strong-title"><i class="fa fa-twitter-square"></i> NexSeed Diary</span></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+ <div class="container" style="text-align: center">
+  <div class="row">
+    <div style="font-size: 20px;">  
+      ニックネーム：<br>
+      <?php echo $_SESSION['join']['nick_name']; ?>
+    </div>
+    <div style="font-size: 20px;">
+      メールアドレス：<br>
+      <?php echo $_SESSION['join']['email']; ?>
+    </div>
+    <div style="font-size: 20px;">
+      パスワード：<br>
+      <?php echo $_SESSION['join']['password']; ?>
+    </div>
+    <img src="../member_picture/<?php echo $_SESSION['join']['picture_path']; ?>" style="width: 24%; height: 32%; border-radius: 5px;">
+    <br>
+    <form method="POST" action="">  
+      <input type="hidden" name="hoge" value="fuga">
+      <a href="index.php" class="btn btn-info">書き直す</a> <!-- &から始まる文字はHTML上で表示できない文字の時に使う　例: & < > etc... -->
+      <input type="submit" value="会員登録" class="btn btn-warning">
+    </form>
   </div>
-  <div>
-    メールアドレス：<br>
-    <?php echo $_SESSION['join']['email']; ?>
-  </div>
-  <div>
-    パスワード：<br>
-    <?php echo $_SESSION['join']['password']; ?>
-  </div>
-  <img src="../member_picture/<?php echo $_SESSION['join']['picture_path']; ?>" width="200">
-  <br>
-  <form method="POST" action="">  
-    <input type="hidden" name="hoge" value="fuga">
-    <a href="index.php">書き直す</a> <!-- &から始まる文字はHTML上で表示できない文字の時に使う　例: & < > etc... -->
-    <input type="submit" value="会員登録">
-  </form>
+ </div>
 </body>
 </html>
