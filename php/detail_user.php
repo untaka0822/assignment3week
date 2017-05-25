@@ -7,7 +7,7 @@ echo '<br>';
 session_start();
 require('dbconnect.php');
 
-if (!isset($_REQUEST['diary_id'])) {
+if (!isset($_REQUEST['member_id'])) {
     header('Location: search.php');
     exit();
 }
@@ -17,8 +17,8 @@ if (!isset($_REQUEST['diary_id'])) {
 // echo $_REQUEST['user_id'];
 
 // 選択したリスト一件取得
-$sql = 'SELECT * FROM `diary`  WHERE `diary_id`=?';
-$data = array($_REQUEST['diary_id']);
+$sql = 'SELECT * FROM `members`  WHERE `member_id`=?';
+$data = array($_REQUEST['member_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $detail = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@ $detail = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!empty($_POST)) {
   
   $_SESSION['join'] = $_POST;
-  header('Location: edit.php');
+  header('Location: edit_user.php');
   exit();
 }
 
@@ -78,22 +78,22 @@ if (!empty($_POST)) {
 
   <div id="all-box">
     <div id="a-box">
-      <a href="../diary_picture/<?php echo $detail['picture_path']; ?>" rel="lightbox"><img src="../diary_picture/<?php echo $detail['picture_path']; ?>" style="width: 32%; height: 40%; text-align: center; padding-top: 3px; padding-bottom: 10px;" class="effectable"></a>
+      <a href="../member_picture/<?php echo $detail['picture_path']; ?>" rel="lightbox"><img src="../member_picture/<?php echo $detail['picture_path']; ?>" style="width: 32%; height: 40%; text-align: center; padding-top: 3px; padding-bottom: 10px;" class="effectable"></a>
 
         <div class="individual" style="float: left; margin-left: 200px; border-bottom: 1px solid #e5e5e5;">  
-          <h4 style="margin: 14px;">タイトル : <?php echo $detail['title']; ?></h4>
+          <h4 style="margin: 14px;">ユーザー名 : <?php echo $detail['nick_name']; ?></h4>
 
-          <h4 style="margin: 14px;">日記の内容 : <?php echo $detail['contents']; ?></h4>
+          <h4 style="margin: 14px;">メールアドレス : <?php echo $detail['email']; ?></h4>
 
-          <h4 style="margin: 14px;">作成日 : <?php echo $detail['created']; ?></h4>
-
+          <h4 style="margin: 14px;">アカウント作成日 : <?php echo $detail['created']; ?></h4>
+          
           <form name="form3" method="POST" action="">
-              <a href="3week.php" class="btn btn-default" style="margin-bottom: 10px;">トップに戻る</a> 
-              <input class="btn btn-success" type="submit" value="編集する" style="margin-bottom: 10px;">
+              <a href="3week.php" class="btn btn-default" style="margin-top: 20px;">トップに戻る</a> 
+              <input class="btn btn-success" type="submit" value="編集する" style="margin-top: 20px;">
               <input type="hidden" name="submit-type" value="edit">
-              <input type="hidden" name="diary_id" value="<?php echo $detail['diary_id']; ?>">
-              <input type="hidden" name="title" value="<?php echo $detail['title']; ?>">
-              <input type="hidden" name="contents" value="<?php echo $detail['contents']; ?>">
+              <input type="hidden" name="member_id" value="<?php echo $detail['member_id']; ?>">
+              <input type="hidden" name="email" value="<?php echo $detail['email']; ?>">
+              <input type="hidden" name="passwprd" value="<?php echo $detail['passwprd']; ?>">
               <input type="hidden" name="created" value="<?php echo $detail['created']; ?>">
           </form>
         </div>

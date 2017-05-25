@@ -92,7 +92,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html"><span class="strong-title"><i class="fa fa-twitter-square"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="login.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -105,7 +105,7 @@ if (!empty($_POST)) {
 </nav>
 
   <div class="container" style="text-align: center">
-  	<h1>ログイン</h1>
+  	<h1 style="border-bottom: 1px solid #e5e5e5; padding: 5px">ログイン</h1>
       <div class="row">
         <form method="POST" action="">
           <div class="col-sm-12">
@@ -127,9 +127,11 @@ if (!empty($_POST)) {
       			<label>パスワード</label><br>
       			<input type="password" name="password" value="<?php echo $password; ?>">
           </div>
-          <div class="col-sm-12" style="margin-top: 10px;">
+          <div class="col-sm-12" style="margin-top: 10px; margin-left: 60px; margin-bottom: 10px">
         		<input type="submit" value="ログイン" class="btn btn-default">
             <input type="checkbox" name="save" value="on">自動ログイン機能 <!-- $_POST['save'] = 'on'; -->
+          </div>
+          <div class="col-sm-12">
             <a href="index.php" class="btn btn-default">会員登録に戻る</a>
           </div>
         </form> 

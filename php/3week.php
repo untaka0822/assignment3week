@@ -24,7 +24,7 @@
   }
 
   // echo '<pre>';
-  // var_dump($_SESSION['login_member_id']);
+  // var_dump($members);
   // echo '</pre>';
 
   // ページング機能
@@ -94,16 +94,25 @@
     $re_stmt->execute($data); // 大事！ 削除機能は取得sql文より前に書く 削除 → 取得 → 表示
 
     }
-  // 編集ボタンを押したとき
+  // 日記編集ボタンを押したとき
   if (!empty($_POST && $_POST['submit-type'] == 'edit')) {
 
       $_SESSION['join'] = $_POST;
       header('Location: edit.php');
       exit();
-
     }
+
+  // ユーザー編集ボタンが押された時
+  if (!empty($_POST && $_POST['submit-type'] == 'edit-user')) {
+
+      $_SESSION['join'] = $_POST;
+      header('Location: edit_user.php');
+      exit();
+  }
+
   // 退会ボタンが押された時
   if (!empty($_POST && $_POST['submit-type'] == 'leave')) {
+
       $_SESSION['join'] = $_POST;
       header('Location: leave.php');
       exit();
@@ -148,7 +157,9 @@
       <?php while($diary = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
         <div class="diary">
               <a href="detail_diary.php?diary_id=<?php echo $diary['diary_id']; ?>" style="font-size: 25px;"><?php echo $diary['title']; ?></a><br>
-              <a href="../diary_picture/<?php echo $diary['picture_path']; ?>" rel="lightbox"><img src="../diary_picture/<?php echo $diary['picture_path']; ?>"" class="effectable" style="width: 24%; height: 32%; border-radius: 5px;"></a> <!-- hrefの後の?の後を次のページで取得するのが$_REQUEST -->
+              <a href="../diary_picture/<?php echo $diary['picture_path']; ?>" rel="lightbox"><img src="../diary_picture/<?php echo $diary['picture_path']; ?>"" class="effectable" style="width: 24%; height: 32%; border-radius: 5px;"></a>
+               <!-- hrefの後の?の後を次のページで取得するのが$_REQUEST $_REQUEST $_REQUEST $_REQUEST $_REQUEST-->
+
               <p class="date"><?php echo $diary['created']; ?></p>
             <form name="form2" method="POST" action="" onsubmit="return submitChk()"> <!-- onsubmitでダイアログの表示 -->
               <input class="btn-xs btn-info" type="submit" name="delete" value="削除" style="margin-bottom: 10px;">
@@ -234,7 +245,7 @@
           <?php } else { // それ以外の時間帯のとき (18:00 〜 05:59の時間帯) ?>
           <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;">Good evening!</p>
       <?php } ?>
-    <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;"><?php echo $members['nick_name']; ?>さん</p>
+    <a href="detail_user.php?member_id=<?php echo $members['member_id']; ?>"><p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;"><?php echo $members['nick_name']; ?>さん</p></a>
       <div class="data1"><a class="history" href="#">
       <?php
         // 日記の最新から3個目まで表示
@@ -273,10 +284,12 @@
       ?>の日記
       </a></div><br>
     </div>
-    <a href="diary.php" class="btn btn-warning">日記を新しく追加する</a> 
+    <a href="diary.php" class="btn btn-warning">日記を新しく追加する</a>
+    <a href="edit_user.php" class="btn btn-success" style="margin-top: 10px;">ユーザー情報を編集する</a>
+    
   </div>
   <div id="d-box">
-   <h5 style="color: white; font-size: 13px">Copyright @ NexSeed inc All Rights Reserved</h5>
+   <h5 style="color: white; font-size: 13px">Copyright @ Hayato.T inc All Rights Reserved</h5>
   </div>
  <script>
     /**

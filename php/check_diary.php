@@ -16,7 +16,7 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time']+ 3600 > time()) {
     $data = array($_SESSION['login_member_id']);
     $stmt1 = $dbh->prepare($sql);
     $stmt1->execute($data);
-    $login_user = $stmt1->fetch(PDO::FETCH_ASSOC);
+    $login_member = $stmt1->fetch(PDO::FETCH_ASSOC);
 
   } else {
     // ログインしていない場合
@@ -37,7 +37,7 @@ if (!empty($_POST)) {
   try { 
         // DBへの登録処理
         $sql = 'INSERT INTO `diary` SET `diary_id`=?, `user_id`=?, `title`=?, `contents`=?, `picture_path`=?, `created`=NOW()';
-        $data = array($diary_id, $login_user['member_id'], $title, $contents, $picture_path);
+        $data = array($diary_id, $login_member['member_id'], $title, $contents, $picture_path);
         $stmt2 = $dbh->prepare($sql);
         $stmt2->execute($data);
 
@@ -82,7 +82,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title"><i class="fa fa-twitter-square"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -97,15 +97,13 @@ if (!empty($_POST)) {
  <div class="container" style="text-align: center">
   <div class="row">
     <div style="font-size: 20px;">
-      日記のタイトル：<br>
-      <?php echo $_SESSION['join']['title']; ?>
+      <p> 日記のタイトル : <?php echo $_SESSION['join']['title']; ?></p>
     </div>
     <div style="font-size: 20px;">
-      日記の内容：<br>
-      <?php echo $_SESSION['join']['contents']; ?>
+      <p> 日記の内容 : <?php echo $_SESSION['join']['contents']; ?></p>
     </div>
     <div style="font-size: 20px;">
-      日記の写真 : <br>
+      日記の写真 <br>
        <img src="../diary_picture/<?php echo $_SESSION['join']['picture_path']; ?>" style="width: 24%; height: 32%; border-radius: 5px;">
     </div>
     <br>
