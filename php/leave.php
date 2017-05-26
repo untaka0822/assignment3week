@@ -68,7 +68,7 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top" style="background-color: deepskyblue;">
       <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header page-scroll">
@@ -78,7 +78,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="top.php" style="font-family: serif"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -95,16 +95,38 @@
       <img src="../member_picture/<?php echo $login_member['picture_path']; ?>" style="width: 27%; height: 36%;">
     </div>
     <div id="b-box">
-      <p>会員番号 : <?php echo $login_member['member_id']; ?></p>
-      <p>会員名 : <?php echo $login_member['nick_name']; ?>様</p>
-      <p>メールアドレス : <?php echo $login_member['email']; ?></p>
+      <p style="font-family: serif">会員番号 : <?php echo $login_member['member_id']; ?></p>
+      <p style="font-family: serif">会員名 : <?php echo $login_member['nick_name']; ?>様</p>
+      <p style="font-family: serif">メールアドレス : <?php echo $login_member['email']; ?></p>
       <form method="POST" action="" onsubmit="return submitChk()">
         <input type="hidden" name="member_id" value="<?php echo $_SESSION['login_member_id']; ?>">
         <input type="hidden" name="like_tweet_id" value="<?php echo $like_tweet_id; ?>">
-        <input type="submit" value="退会する" class="btn btn-default">
-        <a href="3week.php" class="btn btn-info">トップへ戻る</a>
+        <input type="submit" value="退会する" class="btn btn-default" style="font-family: serif"> 
+        <a href="3week.php" class="btn btn-info" style="font-family: serif">トップへ戻る</a>
       </form>
     </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: deepskyblue;">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="top.php" style="font-family: serif; padding-left: 850px"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
   </div>
   <script>
     /**

@@ -72,7 +72,7 @@ if (!empty($_POST)) {
     <link href="../assets/css/main.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top" style="background-color: deepskyblue">
       <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header page-scroll">
@@ -82,7 +82,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php" style="font-family: serif;"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -96,23 +96,44 @@ if (!empty($_POST)) {
 
  <div class="container" style="text-align: center">
   <div class="row">
-    <div style="font-size: 20px;">
+    <div style="font-size: 20px; font-family: serif;">
       <p> 日記のタイトル : <?php echo $_SESSION['join']['title']; ?></p>
     </div>
-    <div style="font-size: 20px;">
+    <div style="font-size: 20px; font-family: serif;">
       <p> 日記の内容 : <?php echo $_SESSION['join']['contents']; ?></p>
     </div>
-    <div style="font-size: 20px;">
+    <div style="font-size: 20px; font-family: serif;">
       日記の写真 <br>
        <img src="../diary_picture/<?php echo $_SESSION['join']['picture_path']; ?>" style="width: 24%; height: 32%; border-radius: 5px;">
     </div>
     <br>
     <form method="POST" action="">
-      <a href="diary.php" class="btn btn-default">戻る</a>
-      <input type="hidden" name="hoge" value="fuga"> <!-- 値を表示せずにDBに保存するときはhidden -->
-      <input type="submit" value="完了" class="btn btn-default">
+      <a href="diary.php" class="btn btn-default" style="font-family: serif;">戻る</a>
+      <input type="hidden" name="hoge" value="fuga" style="font-family: serif;"> <!-- 値を表示せずにDBに保存するときはhidden -->
+      <input type="submit" value="完了" class="btn btn-default" style="font-family: serif;">
     </form>
   </div>
+  <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: deepskyblue">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="3week.php" style="font-family: serif; padding-left: 850px;"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
  </div>
 </body>
 </html>

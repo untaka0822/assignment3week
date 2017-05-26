@@ -1,6 +1,7 @@
 body {
   background-image: url(../member_picture/Alanwalker3.JPG);
   background-size: cover;
+  font-family: serif;
 }
 
 #a-box {
@@ -8,6 +9,7 @@ body {
   padding-top: 3px;
   padding-bottom: 10px; 
   background-color: deepskyblue;
+  font-family: serif;
 }
 
 #b-box {
@@ -24,14 +26,17 @@ body {
   padding-bottom: 10px;
   background-color: white;
   border-radius: 5px;
+  font-family: serif;
 }
 .date {
   font-size: 6px;
+  font-family: serif;
 }
 
 .data1 {
-  background-color: white;
   border-radius: 10px;
+  color: black;
+  font-family: serif;
 }
 
 #c-box {
@@ -41,24 +46,31 @@ body {
   padding-top: 5px;
   padding-left: 40px;
   margin-top: 20px;
+  font-family: serif;
 }
 
 .diarys {
   margin-left: -100px;
+  font-family: serif;
 }
 
 .content2 {
   padding: 10px;
+  font-family: serif;
 }
 
 .data1   {
   border-bottom: 1px ridge #e5e5e5;
   text-align: left;
   margin-top: -10px;
+  font-family: serif;
+  background-color: white;
+  
 }
 
 a.history {
   margin-left: 60px;
+  font-family: serif;
 }
 
 #d-box {
@@ -67,4 +79,5 @@ a.history {
 	text-align: center;
   height: 40px;
   background-color: deepskyblue;
+  font-family: serif;
 }

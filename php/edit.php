@@ -128,7 +128,7 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php" style="font-family: serif;"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -144,8 +144,8 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
     <div class="row">
       <div class="col-md-4 col-md-offset-4 content-margin-top">
         <form method="POST" action="" class="form-horizontal" role="form" enctype="multipart/form-data">
-          <h3>日記の編集</h3>
-	        <div class="msg">
+          <h3 style="font-family: serif;">日記の編集</h3>
+	        <div class="msg" style="font-family: serif;">
 	          日記のタイトル : <input type="text" name="title" value="<?php echo $_SESSION['join']['title']; ?>">
             <?php if(isset($errors['title']) && $errors['title'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
@@ -187,8 +187,8 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
               </div>
 	        </div> 
           <input type="hidden" name="diary_id" value="<?php echo $_SESSION['join']['diary_id']; ?>"> <!-- 大事！条件が一致していないとバグる --> 
-            <input type="submit" name="update" value="更新" class="btn btn-warning" style="text-align: center; margin-top: 10px;">
-            <a href="3week.php" class="btn btn-default" style="margin-top: 10px;">一覧へ戻る</a>
+            <input type="submit" name="update" value="更新" class="btn btn-warning" style="text-align: center; margin-top: 10px;font-family: serif;"">
+            <a href="3week.php" class="btn btn-default" style="margin-top: 10px; font-family: serif;">一覧へ戻る</a>
         </form>
       </div>
 
@@ -202,7 +202,7 @@ if (isset($_SESSION['login_member_id']) && $_SESSION['time'] + 3600 > time()) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white; text-align: right;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white; text-align: right; font-family: serif; padding-left: 860px;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

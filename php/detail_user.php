@@ -64,7 +64,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white; font-family: serif;""><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -81,16 +81,16 @@ if (!empty($_POST)) {
       <a href="../member_picture/<?php echo $detail['picture_path']; ?>" rel="lightbox"><img src="../member_picture/<?php echo $detail['picture_path']; ?>" style="width: 32%; height: 40%; text-align: center; padding-top: 3px; padding-bottom: 10px;" class="effectable"></a>
 
         <div class="individual" style="float: left; margin-left: 200px; border-bottom: 1px solid #e5e5e5;">
-        <h2 style="border-bottom: 1px solid #e5e5e5; margin-bottom: 20px">ユーザー情報</h2> 
-          <h4 style="margin: 14px;">ユーザー名 : <?php echo $detail['nick_name']; ?></h4>
+        <h2 style="border-bottom: 1px solid #e5e5e5; margin-bottom: 20px; font-family: serif;">ユーザー情報</h2> 
+          <h4 style="margin: 14px; font-family: serif;">ユーザー名 : <?php echo $detail['nick_name']; ?></h4>
 
-          <h4 style="margin: 14px;">メールアドレス : <?php echo $detail['email']; ?></h4>
+          <h4 style="margin: 14px; font-family: serif;"">メールアドレス : <?php echo $detail['email']; ?></h4>
 
-          <h4 style="margin: 14px;">アカウント作成日 : <?php echo $detail['created']; ?></h4>
+          <h4 style="margin: 14px; font-family: serif;"">アカウント作成日 : <?php echo $detail['created']; ?></h4>
           
           <form name="form3" method="POST" action="">
-              <a href="3week.php" class="btn btn-default" style="margin-top: 20px;">トップに戻る</a> 
-              <input class="btn btn-success" type="submit" value="編集する" style="margin-top: 20px;">
+              <a href="3week.php" class="btn btn-default" style="margin-top: 20px; font-family: serif;"">トップに戻る</a> 
+              <input class="btn btn-success" type="submit" value="編集する" style="margin-top: 20px; font-family: serif;"">
               <input type="hidden" name="submit-type" value="edit">
               <input type="hidden" name="member_id" value="<?php echo $detail['member_id']; ?>">
               <input type="hidden" name="email" value="<?php echo $detail['email']; ?>">
@@ -111,7 +111,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php" style="font-family: serif; padding-left: 1000px;"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

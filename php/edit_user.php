@@ -142,7 +142,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php" style="font-family: serif";  ><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -158,15 +158,15 @@
     <div class="row">
       <div class="col-md-5 col-md-offset-3 content-margin-top">
       
-       <legend>ユーザー編集画面</legend>
+       <legend style="font-family: serif;">ユーザー編集画面</legend>
         <form method="POST" action="" class="form-horizontal" role="form" enctype="multipart/form-data"><!-- enctypeがないと$_FILESが作成されない-->
           <!-- ニックネーム -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">ニックネーム</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">ニックネーム</label>
             <div class="col-sm-8">
-              <input type="text" name="nick_name" class="form-control" placeholder="<?php echo $members['nick_name']; ?>"> <!-- $_SESSION['join'] = $_POSTのため -->
+              <input type="text" name="nick_name" class="form-control" placeholder="<?php echo $members['nick_name']; ?>" style="font-family: serif;"> <!-- $_SESSION['join'] = $_POSTのため -->
               <?php if(isset($errors['nick_name']) && $errors['nick_name'] == 'blank'): ?> <!-- コロン構文 -->
-              <p style="color: red; font-size: 10px; margin-top: 2px;">
+              <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                 ニックネームを入力してください
               </p>
                <?php endif; ?>
@@ -174,17 +174,17 @@
           </div>
           <!-- メールアドレス -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">メールアドレス</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">メールアドレス</label>
             <div class="col-sm-8">
-              <input type="email" name="email" class="form-control" placeholder="<?php echo $members['email']; ?>">
+              <input type="email" name="email" class="form-control" placeholder="<?php echo $members['email']; ?>" style="font-family: serif;">
               <?php if(isset($errors['email']) && $errors['email'] == 'blank'): ?> <!-- コロン構文 -->
-              <p style="color: red; font-size: 10px; margin-top: 2px;">
+              <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                 メールアドレスを入力してください
               </p>
               <?php endif; ?>
 
               <?php if(isset($errors['email']) && $errors['email'] == 'duplicate'): ?> <!-- コロン構文 -->
-                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                   指定したメールアドレスは既に登録されています。
                 </p>
               <?php endif; ?>
@@ -192,17 +192,17 @@
           </div>
           <!-- パスワード -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">パスワード</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">パスワード</label>
             <div class="col-sm-8">
-              <input type="password" name="password" class="form-control">
+              <input type="password" name="password" class="form-control" placeholder="4文字以上で入力してください" style="font-family: serif;">
               <?php if(isset($errors['password']) && $errors['password'] == 'blank'): ?> <!-- コロン構文 -->
-                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                   パスワードを入力してください
                 </p>
               <?php endif; ?>
 
               <?php if(isset($errors['password']) && $errors['password'] == 'length'): ?> <!-- コロン構文 -->
-                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                   パスワードは4文字以上で入力してください
                 </p>
               <?php endif; ?>
@@ -210,32 +210,32 @@
           </div>
           <!-- プロフィール写真 -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">プロフィール写真</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">プロフィール写真</label>
             <div class="col-sm-7">
-                <input type="file" name="picture_path" class="form-control">
+                <input type="file" name="picture_path" class="form-control" style="font-family: serif;">
               <div class="preview" /><a href="../member_picture/<?php echo $members['picture_path']; ?>" rel="lightbox"><img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 150%; height: 40%;" class="effectable"></a></div>
                 <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'blank'): ?> <!-- コロン構文 -->
-                  <p style="color: red; font-size: 10px; margin-top: 2px;">
+                  <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                    プロフィール画像を選択してください
                   </p>
                 <?php endif; ?>
 
                 <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'type'): ?> <!-- コロン構文 -->
-                  <p style="color: red; font-size: 10px; margin-top: 2px;">
+                  <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                     プロフィール画像は「.jpg」「.png」「.gif」の画像を選択してください
                   </p>
                 <?php endif; ?>
 
                 <?php if(!empty($errors)): ?> <!-- コロン構文 -->
-                  <p style="color: red; font-size: 10px; margin-top: 2px;">
+                  <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif">
                     再度、プロフィール画像を指定してください
                   </p>
                 <?php endif; ?>
             </div>
           </div>
           <div style="text-align: center;">
-            <input type="submit" class="btn btn-warning" name="update" value="更新" style="margin-top: -12px;">
-            <a href="3week.php" class="btn btn-default" style="margin-top: -12px;">トップへ戻る</a>
+            <input type="submit" class="btn btn-warning" name="update" value="更新" style="margin-top: -12px; font-family: serif">
+            <a href="3week.php" class="btn btn-default" style="margin-top: -12px; font-family: serif">トップへ戻る</a>
           </div>
         </form>
       </div>
@@ -251,7 +251,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white; padding-left: 1000px; font-family: serif"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

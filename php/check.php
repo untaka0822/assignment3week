@@ -71,7 +71,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="check.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="check.php" style="font-family: serif;"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -84,15 +84,15 @@ if (!empty($_POST)) {
   </nav>
  <div class="container" style="text-align: center">
   <div class="row">
-    <div style="font-size: 20px;">  
+    <div style="font-size: 20px; font-family: serif;"">  
       ニックネーム：<br>
       <?php echo $_SESSION['join']['nick_name']; ?>
     </div>
-    <div style="font-size: 20px;">
+    <div style="font-size: 20px; font-family: serif;"">
       メールアドレス：<br>
       <?php echo $_SESSION['join']['email']; ?>
     </div>
-    <div style="font-size: 20px;">
+    <div style="font-size: 20px; font-family: serif;"">
       パスワード：<br>
       <?php echo $_SESSION['join']['password']; ?>
     </div>
@@ -100,8 +100,8 @@ if (!empty($_POST)) {
     <br>
     <form method="POST" action="">  
       <input type="hidden" name="hoge" value="fuga">
-      <a href="index.php" class="btn btn-info">書き直す</a> <!-- &から始まる文字はHTML上で表示できない文字の時に使う　例: & < > etc... -->
-      <input type="submit" value="会員登録" class="btn btn-warning">
+      <a href="index.php" class="btn btn-info" style="font-family: serif;">書き直す</a> <!-- &から始まる文字はHTML上で表示できない文字の時に使う　例: & < > etc... -->
+      <input type="submit" value="会員登録" class="btn btn-warning" style="font-family: serif;">
     </form>
   </div>
  </div>

@@ -28,7 +28,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="login.php" style="font-family: serif;"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -43,11 +43,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 col-md-offset-4 content-margin-top">
-        <div class="well">
+        <div class="well" style="font-family: serif;">
           ご登録ありがとうございます。 <br>
           下記ボタンよりログインして下さい。
         </div>
-        <a href="login.php" class="btn btn-default">ログイン</a>
+        <a href="login.php" class="btn btn-default" style="font-family: serif;">ログイン</a>
       </div>
     </div>
   </div>

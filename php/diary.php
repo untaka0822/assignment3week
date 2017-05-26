@@ -84,7 +84,7 @@ if (!empty($_POST)) {
 
   </head>
   <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top" style="background-color: deepskyblue;">
       <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header page-scroll">
@@ -94,12 +94,11 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php" style="font-family: serif;"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout.php" class="btn-xs btn-danger" style="color: white;">ログアウト</a></li>
               </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -111,13 +110,13 @@ if (!empty($_POST)) {
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 content-margin-top">
-        <legend>新しい日記の登録</legend>
+        <legend style="font-family: serif;">新しい日記の登録</legend>
         <form method="POST" action="" class="form-horizontal" role="form" enctype="multipart/form-data"><!-- enctypeがないと$_FILESが作成されない-->
           <!-- ニックネーム -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">日記のタイトル</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">日記のタイトル</label>
             <div class="col-sm-8">
-              <input type="text" name="title" class="form-control" value="<?php echo $title; ?>" placeholder="例： 神谷の一日">
+              <input type="text" name="title" class="form-control" value="<?php echo $title; ?>" placeholder="例： 神谷の一日" style="font-family: serif;">
               <?php if(isset($errors['title']) && $errors['title'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 タイトルを入力してください
@@ -127,11 +126,11 @@ if (!empty($_POST)) {
           </div>
           <!-- メールアドレス -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">日記の内容</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">日記の内容</label>
             <div class="col-sm-8">
-              <textarea type="contents" cols="100" rows="4" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： スタバに行ってきたよ"></textarea> 
+              <textarea type="contents" cols="100" rows="4" name="contents" class="form-control" value="<?php echo $contents; ?>" placeholder="例： スタバに行ってきたよ" style="font-family: serif;"></textarea> 
               <?php if(isset($errors['contents']) && $errors['contents'] == 'blank'): ?> <!-- コロン構文 -->
-              <p style="color: red; font-size: 10px; margin-top: 2px;">
+              <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif;"">
                 日記の内容を入力してください
               </p>
               <?php endif; ?>
@@ -139,35 +138,56 @@ if (!empty($_POST)) {
           </div>
            <!-- プロフィール写真 -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">プロフィール写真</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">プロフィール写真</label>
             <div class="col-sm-8">
-              <input type="file" name="picture_path" class="form-control" value="<?php echo $picture_path; ?>">
+              <input type="file" name="picture_path" class="form-control" value="<?php echo $picture_path; ?>" style="font-family: serif;">
               <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'blank'): ?> <!-- コロン構文 -->
-                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif;">
                  プロフィール画像を選択してください
                 </p>
               <?php endif; ?>
 
               <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'type'): ?> <!-- コロン構文 -->
-                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif;">
                   プロフィール画像は「.jpg」「.png」「.gif」の画像を選択してください
                 </p>
               <?php endif; ?>
 
               <?php if(!empty($errors)): ?> <!-- コロン構文 -->
-                <p style="color: red; font-size: 10px; margin-top: 2px;">
+                <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif;">
                   再度、プロフィール画像を指定してください
                 </p>
               <?php endif; ?>
             </div>
           </div>
           <div class="row" style="text-align: center;">
-          <a class="btn btn-info" href="3week.php" style="margin-right: 20px">一覧へ戻る</a>
-          <input type="submit" class="btn btn-success" value="確認画面へ">
+          <a class="btn btn-info" href="3week.php" style="margin-right: 20px; font-family: serif;">一覧へ戻る</a>
+          <input type="submit" class="btn btn-success" value="確認画面へ" style="font-family: serif;">
           </div>
         </form>
       </div>
     </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: deepskyblue;">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="3week.php" style="font-family: serif; padding-left: 850px"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
   </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

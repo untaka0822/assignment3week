@@ -132,7 +132,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a><a href="login.php" class="btn btn-default" style="margin-top: 10px; margin-left: 600px;"> 会員の方はこちら</a>
+              <a class="navbar-brand" href="index.php" style="font-family: serif;"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a><a href="login.php" class="btn btn-default" style="margin-top: 10px; margin-left: 600px; font-family: serif;""> 会員の方はこちら</a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -147,13 +147,13 @@ if (!empty($_POST)) {
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 content-margin-top">
-        <legend>新規会員登録</legend>
+        <legend style="font-family: serif;">新規会員登録</legend>
         <form method="POST" action="" class="form-horizontal" role="form" enctype="multipart/form-data"><!-- enctypeがないと$_FILESが作成されない-->
           <!-- ニックネーム -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">ニックネーム</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">ニックネーム</label>
             <div class="col-sm-8">
-              <input type="text" name="nick_name" class="form-control" value="<?php echo $nick_name; ?>" placeholder="例： 川辺 今人">
+              <input type="text" name="nick_name" class="form-control" value="<?php echo $nick_name; ?>" placeholder="例： 川辺 今人" style="font-family: serif;">
               <?php if(isset($errors['nick_name']) && $errors['nick_name'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 ニックネームを入力してください
@@ -163,9 +163,9 @@ if (!empty($_POST)) {
           </div>
           <!-- メールアドレス -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">メールアドレス</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">メールアドレス</label>
             <div class="col-sm-8">
-              <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="例： tyokusoubin@gmail.com"> 
+              <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="例： tyokusoubin@gmail.com" style="font-family: serif;"> 
               <?php if(isset($errors['email']) && $errors['email'] == 'blank'): ?> <!-- コロン構文 -->
               <p style="color: red; font-size: 10px; margin-top: 2px;">
                 メールアドレスを入力してください
@@ -181,7 +181,7 @@ if (!empty($_POST)) {
           </div>
           <!-- パスワード -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">パスワード</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">パスワード</label>
             <div class="col-sm-8">
               <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
               <?php if(isset($errors['password']) && $errors['password'] == 'blank'): ?> <!-- コロン構文 -->
@@ -199,9 +199,9 @@ if (!empty($_POST)) {
           </div>
           <!-- プロフィール写真 -->
           <div class="form-group">
-            <label class="col-sm-4 control-label">プロフィール写真</label>
+            <label class="col-sm-4 control-label" style="font-family: serif;">プロフィール写真</label>
             <div class="col-sm-8">
-              <input type="file" name="picture_path" class="form-control" value="<?php echo $picture_path; ?>">
+              <input type="file" name="picture_path" class="form-control" value="<?php echo $picture_path; ?>" style="font-family: serif;">
               <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'blank'): ?> <!-- コロン構文 -->
                 <p style="color: red; font-size: 10px; margin-top: 2px;">
                  プロフィール画像を選択してください
@@ -222,7 +222,7 @@ if (!empty($_POST)) {
             </div>
           </div>
           <div style="text-align: center;">
-          <input type="submit" class="btn btn-default" value="確認画面へ" style="margin-top: 10px;">
+          <input type="submit" class="btn btn-default" value="確認画面へ" style="margin-top: 10px; font-family: serif;"">
           </div>
         </form>
       </div>

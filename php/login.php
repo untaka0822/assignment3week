@@ -92,7 +92,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="login.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="login.php" style="font-family: serif;"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -105,34 +105,34 @@ if (!empty($_POST)) {
 </nav>
 
   <div class="container" style="text-align: center">
-  	<h1 style="border-bottom: 1px solid #e5e5e5; padding: 5px">ログイン</h1>
+  	<h1 style="border-bottom: 1px solid #e5e5e5; padding: 5px; font-family: serif;">ログイン</h1>
       <div class="row">
         <form method="POST" action="">
           <div class="col-sm-12">
-    			<label>メールアドレス</label><br>
+    			<label style="font-family: serif;">メールアドレス</label><br>
     			<input type="email" name="email" value="<?php echo $email; ?>">
       			<?php if(isset($errors['login']) && $errors['login'] == 'blank'): ?> <!-- コロン構文 -->
-      				<p style="color: red; font-size: 10px; margin-top: 2px;">
+      				<p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif;">
       					メールアドレスとパスワードを入力してください
       				</p>
       			<?php endif; ?>
 
             <?php if(isset($errors['login']) && $errors['login'] == 'failed'): ?> <!-- コロン構文 -->
-              <p style="color: red; font-size: 10px; margin-top: 2px;">
+              <p style="color: red; font-size: 10px; margin-top: 2px; font-family: serif;"">
                 ログインに失敗しました。再度正しい情報でログインしてください
               </p>
             <?php endif; ?>
           </div>
           <div class="col-sm-12">
-      			<label>パスワード</label><br>
+      			<label style="font-family: serif;">パスワード</label><br>
       			<input type="password" name="password" value="<?php echo $password; ?>">
           </div>
           <div class="col-sm-12" style="margin-top: 10px; margin-left: 60px; margin-bottom: 10px">
-        		<input type="submit" value="ログイン" class="btn btn-default">
-            <input type="checkbox" name="save" value="on">自動ログイン機能 <!-- $_POST['save'] = 'on'; -->
+        		<input type="submit" value="ログイン" class="btn btn-default" style="font-family: serif;">
+            <input type="checkbox" name="save" value="on" style="font-family: serif;">自動ログイン機能 <!-- $_POST['save'] = 'on'; -->
           </div>
           <div class="col-sm-12">
-            <a href="index.php" class="btn btn-default">会員登録に戻る</a>
+            <a href="index.php" class="btn btn-default" style="font-family: serif;">会員登録に戻る</a>
           </div>
         </form> 
     </div>

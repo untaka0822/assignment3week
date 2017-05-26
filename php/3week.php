@@ -292,6 +292,7 @@
   <div id="d-box">
    <h5 style="color: white; font-size: 13px">Copyright @ Hayato.T inc All Rights Reserved</h5>
   </div>
+  
  <script>
     /**
      * 確認ダイアログの返り値によりフォーム送信
