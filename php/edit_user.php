@@ -132,7 +132,7 @@
   <script type="text/javascript" src="../resource/lightbox_plus.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top" style="background-color: deepskyblue;">
       <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header page-scroll">
@@ -142,7 +142,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -213,7 +213,7 @@
             <label class="col-sm-4 control-label">プロフィール写真</label>
             <div class="col-sm-7">
                 <input type="file" name="picture_path" class="form-control">
-              <div class="preview" /><a href="../member_picture/<?php echo $members['picture_path']; ?>" rel="lightbox"><img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 120%; height: 35%;" class="effectable"></a></div>
+              <div class="preview" /><a href="../member_picture/<?php echo $members['picture_path']; ?>" rel="lightbox"><img src="../member_picture/<?php echo $members['picture_path']; ?>" style="width: 150%; height: 40%;" class="effectable"></a></div>
                 <?php if(isset($errors['picture_path']) && $errors['picture_path'] == 'blank'): ?> <!-- コロン構文 -->
                   <p style="color: red; font-size: 10px; margin-top: 2px;">
                    プロフィール画像を選択してください
@@ -234,12 +234,35 @@
             </div>
           </div>
           <div style="text-align: center;">
-            <input type="submit" class="btn btn-warning" name="update" value="更新" style="margin-top: 10px;">
-            <a href="3week.php" class="btn btn-default" style="margin-top: 10px;">トップへ戻る</a>
+            <input type="submit" class="btn btn-warning" name="update" value="更新" style="margin-top: -12px;">
+            <a href="3week.php" class="btn btn-default" style="margin-top: -12px;">トップへ戻る</a>
           </div>
         </form>
       </div>
-    </div>
+
+      <!-- 下のバー -->
+      <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: deepskyblue;">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+              </ul> 
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+  </div>
   </div>
 
 <script>

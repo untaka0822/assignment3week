@@ -54,7 +54,7 @@ if (!empty($_POST)) {
 </head>
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top" style="background-color: deepskyblue;">
       <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header page-scroll">
@@ -64,7 +64,7 @@ if (!empty($_POST)) {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="3week.php"><span class="strong-title"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color: white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -80,7 +80,8 @@ if (!empty($_POST)) {
     <div id="a-box">
       <a href="../diary_picture/<?php echo $detail['picture_path']; ?>" rel="lightbox"><img src="../diary_picture/<?php echo $detail['picture_path']; ?>" style="width: 32%; height: 40%; text-align: center; padding-top: 3px; padding-bottom: 10px;" class="effectable"></a>
 
-        <div class="individual" style="float: left; margin-left: 200px; border-bottom: 1px solid #e5e5e5;">  
+        <div class="individual" style="float: left; margin-left: 200px; border-bottom: 1px solid #e5e5e5;">
+        <h2 style="border-bottom: 1px solid #e5e5e5; margin-bottom: 20px">日記の情報</h2>  
           <h4 style="margin: 14px;">タイトル : <?php echo $detail['title']; ?></h4>
 
           <h4 style="margin: 14px;">日記の内容 : <?php echo $detail['contents']; ?></h4>
@@ -90,14 +91,38 @@ if (!empty($_POST)) {
           <form name="form3" method="POST" action="">
               <a href="3week.php" class="btn btn-default" style="margin-bottom: 10px;">トップに戻る</a> 
               <input class="btn btn-success" type="submit" value="編集する" style="margin-bottom: 10px;">
-              <input type="hidden" name="submit-type" value="edit">
               <input type="hidden" name="diary_id" value="<?php echo $detail['diary_id']; ?>">
               <input type="hidden" name="title" value="<?php echo $detail['title']; ?>">
               <input type="hidden" name="contents" value="<?php echo $detail['contents']; ?>">
+              <input type="hidden" name="picture_path" value="<?php echo $detail['picture_path']; ?>">
               <input type="hidden" name="created" value="<?php echo $detail['created']; ?>">
           </form>
         </div>
     </div>
+
+     <div id="d-box">
+      <nav class="navbar navbar-default navbar-fixed-bottom" style="background-color: deepskyblue;">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="3week.php"><span class="strong-title" style="color:white;"><i class="fa fa-linux"></i> NexSeed Diary</span></a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+              </ul> 
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+     </div>
   </div>
 
   

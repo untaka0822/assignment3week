@@ -172,6 +172,7 @@
               <input type="hidden" name="diary_id" value="<?php echo $diary['diary_id']; ?>">
               <input type="hidden" name="title" value="<?php echo $diary['title']; ?>">
               <input type="hidden" name="contents" value="<?php echo $diary['contents']; ?>">
+              <input type="hidden" name="picture_path" value="<?php echo $diary['picture_path']; ?>">
               <input type="hidden" name="created" value="<?php echo $diary['created']; ?>">
             </form>
             <?php
@@ -214,16 +215,16 @@
           ?>
           <!-- ページングボタンが押された時に変わる -->
           <div class="col-xs-6 col-lg-offset-2">
-          <p style="color: white;"><?php echo $page . 'ページ目'; ?></p>
+          <p style="color: black;"><?php echo $page . 'ページ目'; ?></p>
             <?php if($page > 1): ?>
-                <a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>" class="btn btn-warning">前</a>
+                <a href="3week.php?page=<?php echo $page - 1; ?><?php echo $word; ?>" class="btn btn-warning">前</a><!-- $_GETを使用 -->
             <?php else: ?>
                 <a href="" class="btn btn-default">前</a>
             <?php endif; ?>
 
             &nbsp;&nbsp;|&nbsp;&nbsp;
             <?php if($page < $max_page - 1): ?>
-                <a href="3week.php?page=<?php echo $page + 1; ?><?php echo $word; ?>" class="btn btn-warning">次</a>
+                <a href="3week.php?page=<?php echo $page + 1; ?><?php echo $word; ?>" class="btn btn-warning">次</a><!-- $_GETを使用 -->
             <?php else: ?>
                 <a href="" class="btn btn-default">次</a>
             <?php endif; ?>
@@ -245,7 +246,7 @@
           <?php } else { // それ以外の時間帯のとき (18:00 〜 05:59の時間帯) ?>
           <p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;">Good evening!</p>
       <?php } ?>
-    <a href="detail_user.php?member_id=<?php echo $members['member_id']; ?>"><p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;"><?php echo $members['nick_name']; ?>さん</p></a>
+    <a href="detail_user.php?member_id=<?php echo $members['member_id'];　// $_REQUESTを使用する ?>"><p style="font-size: 20px; margin-top: 25px; text-align: center; background-color: white; color: black; border-radius: 15px;"><?php echo $members['nick_name']; ?>さん</p></a>
       <div class="data1"><a class="history" href="#">
       <?php
         // 日記の最新から3個目まで表示
