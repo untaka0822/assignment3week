@@ -286,7 +286,7 @@
       </a></div><br>
     </div>
     <a href="diary.php" class="btn btn-warning">日記を新しく追加する</a>
-    <a href="edit_user.php" class="btn btn-success" style="margin-top: 10px;">ユーザー情報を編集する</a>
+    <a href="edit_user.php" class="btn btn-success" style="margin-top: 10px; margin-bottom: 10px">ユーザー情報を編集する</a>
     
   </div>
   <div id="d-box">
